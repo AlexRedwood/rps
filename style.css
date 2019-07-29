@@ -7,6 +7,10 @@ html{
   height: 100%;
 }
 
+body {
+  heigth: 100%;
+}
+
 /* Header text */
 h1 {
   text-align: center;
