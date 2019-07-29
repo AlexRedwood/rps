@@ -11,43 +11,302 @@
       
     <div id ="mainGame">
       <div id ="playerChoices">
-        <h2>Your choice</h2>
+        <h2>Your choice: </h2>
         <div class="rock">
-          <img src="rock.png" alt="rock">
+          <button id="playerRock" onclick="playerChoseRock()"><img src="rock.png" alt="rock"></button>
         </div>
         <div class="paper">
-          <img src="paper.png" alt="paper">
+          <button id="playerPaper" onclick="playerChosePaper()"><img src="paper.png" alt="paper"></button>
         </div>
         <div class="scissors">
-          <img src="scissors.png" alt="scissors">
+          <button id="playerScissors" onclick="playerChoseScissors()"><img src="scissors.png" alt="scissors"></button>
         </div>
+        <!-- <h2>Your score: </h2>-->
       </div>
-      <div id="whoWon">
-        
+      <div id="communication">
+        <p>Please, choose one on the left and try your luck!</p>
 
       </div>
       <div id ="aiChoices">
-        <h2>Computer's choice</h2>
+        <h2>Computer choice: </h2>
         <div class="rock">
-          <img src="rock.png" alt="rock">
+          <button id="aiRock"><img src="rock.png" alt="rock"></button>
         </div>
         <div class="paper">
-          <img src="paper.png" alt="paper">
+          <button id="aiPaper"><img src="paper.png" alt="paper"></button>
         </div>
         <div class="scissors">
-          <img src="scissors.png" alt="scissors">
+          <button id="aiScissors"><img src="scissors.png" alt="scissors"></button>
         </div>
+        <!-- <h2>Computer score: </h2>-->
       </div>
    </div>
   
     <script>
+      //random function
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min) ) + min;
+      }
+    
+
+      function game(playerChoice, aiChoice) {
+        if ( playerChoice.toLowerCase() == aiChoice.toLowerCase() ) {
+          return 'tie'
+        } else if (
+          (playerChoice.toLowerCase() == 'rock' && aiChoice.toLowerCase() == 'paper') ||
+          (playerChoice.toLowerCase() == 'paper' && aiChoice.toLowerCase() == 'scissors') ||
+          (playerChoice.toLowerCase() == 'scissors' && aiChoice.toLowerCase() == 'rock')
+        ) {
+          return 'lost'
+        } else {
+          return 'win'
+        }
+      }
+
+      function playerChoseRock() {
+        // make choice glow blue
+        document.getElementById('playerRock').setAttribute("class",
+         "playerChoicesWhenClicked");
+        //after 10 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('playerRock').setAttribute("class",
+          ".playerChoiceEnd");}, 
+          7000);
+        //after 0.5 sec telling user to wait for the ai choice
+        setTimeout( 
+          function() {document.getElementById('communication').innerHTML = "Nice! Let's wait for a computer choice..."
+          ;}, 
+          500);
+        //after 0.5 sec computer starting to choose
+
+        // make rock choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "aiChoosing");}, 
+          1000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "playerChoiceEnd");}, 
+          2000);
+
+        // make paper choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "aiChoosing");}, 
+          2000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "playerChoiceEnd");}, 
+          3000);
+
+        // make scissors choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "aiChoosing");}, 
+          3000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "playerChoiceEnd");}, 
+          4000);
+        //Ai choosing random image
+        setTimeout( 
+          function computerPlay() {
+            aiChoice = getRndInteger(1,4);
+            if (aiChoice == 1) {
+              document.getElementById('aiRock').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "It's a tie! Let's try again!";
+              return 'Rock'
+            } else if (aiChoice == 2) {
+              document.getElementById('aiPaper').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "You lost! How unlucky...";
+              return 'Paper'
+            } else {
+              document.getElementById('aiScissors').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "Good job! You won this one!";
+              return 'Scissors'
+            } 
+          },
+          4500);
+
+          setTimeout( 
+            function() {
+              document.getElementById('aiRock').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiPaper').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiScissors').setAttribute("class","playerChoiceEnd");
+              document.getElementById('communication').innerHTML = "Choose one from the left again!";
+            }, 
+            7000);
+      }
       
 
-    
-    
-    
-    
-    
+      function playerChosePaper() {
+        // make choice glow blue
+        document.getElementById('playerPaper').setAttribute("class",
+         "playerChoicesWhenClicked");
+        //after 10 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('playerPaper').setAttribute("class",
+          ".playerChoiceEnd");}, 
+          7000);
+        //after 0.5 sec telling user to wait for the ai choice
+        setTimeout( 
+          function() {document.getElementById('communication').innerHTML = "Good! What will AI choose?.."
+          ;}, 
+          500);
+        //after 0.5 sec computer starting to choose
+
+        // make rock choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "aiChoosing");}, 
+          1000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "playerChoiceEnd");}, 
+          2000);
+
+        // make paper choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "aiChoosing");}, 
+          2000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "playerChoiceEnd");}, 
+          3000);
+
+        // make scissors choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "aiChoosing");}, 
+          3000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "playerChoiceEnd");}, 
+          4000);
+        //Ai choosing random image
+        setTimeout( 
+          function computerPlay() {
+            aiChoice = getRndInteger(1,4);
+            if (aiChoice == 1) {
+              document.getElementById('aiRock').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "You won, you lucky bastard!";
+              return 'Rock'
+            } else if (aiChoice == 2) {
+              document.getElementById('aiPaper').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "It's a tie!";
+              return 'Paper'
+            } else {
+              document.getElementById('aiScissors').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "YOU DIED..ehm, I mean you lost.";
+              return 'Scissors'
+            } 
+          },
+          4500);
+
+          setTimeout( 
+            function() {
+              document.getElementById('aiRock').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiPaper').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiScissors').setAttribute("class","playerChoiceEnd");
+              document.getElementById('communication').innerHTML = "Choose again!";
+            }, 
+            7000);
+      }
+      
+      function playerChoseScissors() {
+        // make choice glow blue
+        document.getElementById('playerScissors').setAttribute("class",
+         "playerChoicesWhenClicked");
+        //after 10 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('playerScissors').setAttribute("class",
+          ".playerChoiceEnd");}, 
+          7000);
+        //after 0.5 sec telling user to wait for the ai choice
+        setTimeout( 
+          function() {document.getElementById('communication').innerHTML = "Opponent's turn!"
+          ;}, 
+          500);
+        //after 0.5 sec computer starting to choose
+
+        // make rock choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "aiChoosing");}, 
+          1000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiRock').setAttribute("class",
+          "playerChoiceEnd");}, 
+          2000);
+
+        // make paper choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "aiChoosing");}, 
+          2000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiPaper').setAttribute("class",
+          "playerChoiceEnd");}, 
+          3000);
+
+        // make scissors choice glow grey
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "aiChoosing");}, 
+          3000);
+        //after 0.5 sec make it normal again
+        setTimeout( 
+          function() {document.getElementById('aiScissors').setAttribute("class",
+          "playerChoiceEnd");}, 
+          4000);
+        //Ai choosing random image
+        setTimeout( 
+          function computerPlay() {
+            aiChoice = getRndInteger(1,4);
+            if (aiChoice == 1) {
+              document.getElementById('aiRock').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "Well, you lost...";
+              return 'Rock'
+            } else if (aiChoice == 2) {
+              document.getElementById('aiPaper').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "And a winner is YOU!";
+              return 'Paper'
+            } else {
+              document.getElementById('aiScissors').setAttribute("class",
+              "aiChoice");
+              document.getElementById('communication').innerHTML = "Tie!";
+              return 'Scissors'
+            } 
+          },
+          4500);
+
+          setTimeout( 
+            function() {
+              document.getElementById('aiRock').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiPaper').setAttribute("class","playerChoiceEnd");
+              document.getElementById('aiScissors').setAttribute("class","playerChoiceEnd");
+              document.getElementById('communication').innerHTML = "Play some more!";
+            }, 
+            7000);
+      }
+
     </script>
   </body>
 </html>
